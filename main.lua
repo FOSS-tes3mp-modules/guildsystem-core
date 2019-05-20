@@ -5,8 +5,8 @@ guildsystem = {}
 
 --- options file
 guildsystem.optionsFile = "/custom/guildsystem/options.json"
---- module version: 0.1
-guildsystem.version = '0.1'
+--- module version: 1
+guildsystem.version = 1
 
 --- Main method
 -- @section main
@@ -129,10 +129,51 @@ function guildsystem.createOptionsFile()
 		files = {
 			guilds = "/custom/guildsystem/guilds.json"
 		},
-		version = '0.1'
+		version = 1
 	}
 	return guildsystem.saveOptions()
 end
+
+--- Update functions
+-- @section update
+
+--- Update version, returning boolean of success status
+-- @return boolean
+function guildsystem.updateVersion()
+	local update = false
+	local scriptVersion = true
+	local optionsVersion = true
+
+	if guildsystem.options.version == nil or guildsystem.options.version == 0 or type(guildsystem.options.version) ~= "number" then
+		optionsVersion = false
+	end
+
+	if guildsystem.version == nil or guildsystem.version == 0 or type(guildsystem.version) ~= "number" then
+		scriptVersion = false
+	end
+
+	if !scriptVersion and !optionsVersion then
+		update = false
+	else if !scriptVersion and optionsVersion then
+		guildsystem.version = guildsystem.options.version
+	else if scriptVersion and !optionsVersion then
+		guildsystem.options.version = guildsystem.version
+	end
+
+	-- For future updates
+	if scriptVersion == 1 then
+		if optionsVersion == 2 then
+
+		end
+	end
+	
+	if update then
+		return guildsystem.saveOptions()
+	else
+		return false
+	end
+end
+
 
 --- File functions
 -- @section file
