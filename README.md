@@ -11,9 +11,9 @@ Not yet, there is still some work to be done and tested.
 - Config loading
 - Submodule loading
 - Creating an guild
+- Deleting an guild
 
 ### Uncoded
-- Deleting an guild
 - Leaving an guild
 - (custom) ranks
 - Proper version -> new version updating
