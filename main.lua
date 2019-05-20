@@ -89,6 +89,7 @@ end
 
 --- Loads submodules
 -- Load submodules from guildsystem.options.submodules
+-- @todo check if prequire is better compared to current method used
 function guildsystem.loadSubmodules()
     if guildsystem.submodules == nil then
         guildsystem.submodules = {}
