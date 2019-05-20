@@ -7,13 +7,19 @@ No, currently this project is just a stub. Check back when I've made some more p
 
 
 ## How to install
-1. clone this repository in your `server/scripts/custom/` (git clone git@github.com:FOSS-tes3mp-modules/guildsystem-core.git guildsystem)
-2. add `require("custom/guildsystem/main")` to `server/scripts/customScripts.lua`
-3. create `server/data/custom/guildsystem/`
-4. success!
+1. clone this repository in your `server/scripts/custom/`:
+```
+git clone git@github.com:FOSS-tes3mp-modules/guildsystem-core.git guildsystem
+```
+4. add `require("custom/guildsystem/main")` to `server/scripts/customScripts.lua`
+5. create `server/data/custom/guildsystem/`
+6. success!
 
 ## How to install an submodule
-1. clone the repository in your `server/scripts/custom/guildsystem` (git clone git@github.com:FOSS-tes3mp-modules/guildsystem-%submodule-name%.git %submodule-name%)
+1. clone the repository in your `server/scripts/custom/guildsystem`
+```
+git clone git@github.com:FOSS-tes3mp-modules/guildsystem-%submodule-name%.git %submodule-name%
+```
 2. Add it to the submodules section in `server/data/custom/guildsystem/options.json`:
 ```json
 {
