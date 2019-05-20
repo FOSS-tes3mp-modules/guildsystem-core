@@ -33,6 +33,7 @@ end
 
 --- Saves guilds
 -- saves guilds to file, returns true if saved, false if not
+-- @return boolean
 function guildsystem.core.save.guilds()
 	return jsonInterface.save(guildsystem.config.files.guilds)
 end
