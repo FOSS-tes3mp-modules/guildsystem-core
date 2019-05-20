@@ -14,16 +14,27 @@ guildsystem.version = '0.1'
 --- Init function
 -- Starts the guild system and loads needed files for core
 function guildsystem.init()
-	tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load options file: " .. guildsystem.core.optionsFile)
-	if guildsystem.loadOptions() then
-		tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Options loaded.")
-		tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load guilds file: " .. guildsystem.options.files.guilds)
-		if guildsystem.loadGuilds() then
-			tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Guilds loaded.")
-			tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load guilds submodules")
-
-			guildsystem.loadSubmodules() -- submodules should report if they loaded correctly
+	tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load options file: " .. guildsystem.optionsFile)
+	if !guildsystem.loadOptions() then
+		tes3mp.LogMessage(enumerations.log.WARN, "[guilds] Couldn't load options file, attempting to create it instead.")
+		if !guildsystem.createOptionsFile() then
+			tes3mp.LogMessage(enumerations.log.ERROR, "[guilds] Couldn't create options file: " .. guildsystem.optionsFile)
+			tes3mp.LogMessage(enumerations.log.ERROR, "[guilds] Guildsystem will not be able to save, make sure that " .. guildsystem.optionsFile .. "'s directory is writable")
 		end
+	end
+
+	tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load guilds file: " .. guildsystem.options.files.guilds)
+	if !guildsystem.loadGuilds() then
+		tes3mp.LogMessage(enumerations.log.WARN, "[guilds] Couldn't load options file, attempting to create it instead.")
+		if !guildsystem.createGuildsFile() then
+			tes3mp.LogMessage(enumerations.log.ERROR, "[guilds] Couldn't create guilds file: " .. guildsystem.options.files.guilds)
+			tes3mp.LogMessage(enumerations.log.ERROR, "[guilds] Guildsystem will not be able to save, make sure that " .. guildsystem.options.files.guilds .. "'s directory is writable")
+		end
+	end
+	
+	tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load guilds submodules")
+	if !guildsystem.loadSubmodules() then -- submodules should report if they loaded correctly
+
 	end
 end
 
