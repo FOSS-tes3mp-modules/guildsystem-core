@@ -3,8 +3,22 @@ The core for the guildsystem for tes3mp
 
 
 ## Should I use this?
-No, currently this project is just a stub. Check back when I've made some more progress.
+Not yet, there is still some work to be done and tested.
+### Tested
+- Nothing
 
+### Untested
+- Config loading
+- Submodule loading
+
+### Uncoded
+- Creating an guild
+- Leaving an guild
+- (custom) ranks
+- Proper version -> new version updating
+- data structures for guilds
+- Chat/GUI handler (might shoot this off to another module)
+- Hooks system (hooks for creating/leaving a guild etc.. so submodules can change default action of core)
 
 ## How to install
 1. clone this repository in your `server/scripts/custom/`:
