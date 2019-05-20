@@ -13,6 +13,7 @@ Not yet, there is still some work to be done and tested.
 - Creating an guild
 
 ### Uncoded
+- Deleting an guild
 - Leaving an guild
 - (custom) ranks
 - Proper version -> new version updating
