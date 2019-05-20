@@ -8,7 +8,7 @@ No, currently this project is just a stub. Check back when I've made some more p
 
 ## How to install
 1. clone this repository in your `server/scripts/custom/` (git clone git@github.com:FOSS-tes3mp-modules/guildsystem-core.git guildsystem)
-2. add `require("custom/guildsystem/core/main")` to `server/scripts/customScripts.lua`
+2. add `require("custom/guildsystem/main")` to `server/scripts/customScripts.lua`
 3. create `server/data/custom/guildsystem/`
 4. success!
 
