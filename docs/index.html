@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>guildsystem</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>guildsystem</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Fields">Fields</a></li>
+<li><a href="#Load_functions">Load functions </a></li>
+<li><a href="#Save_functions">Save functions </a></li>
+<li><a href="#Main_method">Main method </a></li>
+<li><a href="#file_methods">file methods </a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>guildsystem</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>guildsystem</code></h1>
+<p>guildsystem</p>
+<p>
+
+</p>
+
+
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#optionsFile">optionsFile</a></td>
+	<td class="summary">options file</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#version">version</a></td>
+	<td class="summary">module version: 0.1</td>
+	</tr>
+</table>
+<h2><a href="#Load_functions">Load functions </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#loadOptions">loadOptions ()</a></td>
+	<td class="summary">Loads options
+ loads options from file, returns true if loaded, false if not</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#loadGuilds">loadGuilds ()</a></td>
+	<td class="summary">Loads guilds
+ loads guilds from file, returns true if loaded, false if not</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#loadSubmodules">loadSubmodules ()</a></td>
+	<td class="summary">Loads submodules
+ Load submodules from guildsystem.options.submodules</td>
+	</tr>
+</table>
+<h2><a href="#Save_functions">Save functions </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#saveOptions">saveOptions ()</a></td>
+	<td class="summary">Save options
+ saves options to file, returns true if loaded, false if not.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#saveGuilds">saveGuilds ()</a></td>
+	<td class="summary">Saves guilds
+ saves guilds to file, returns true if saved, false if not</td>
+	</tr>
+</table>
+<h2><a href="#Main_method">Main method </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#init">init ()</a></td>
+	<td class="summary">Init function
+ Starts the guild system and loads needed files for core</td>
+	</tr>
+</table>
+<h2><a href="#file_methods">file methods </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#fileCheck">fileCheck (path)</a></td>
+	<td class="summary">filecheck
+ check if file exists, returns boolean</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "optionsFile"></a>
+    <strong>optionsFile</strong>
+    </dt>
+    <dd>
+    options file
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "version"></a>
+    <strong>version</strong>
+    </dt>
+    <dd>
+    module version: 0.1
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Load_functions"></a>Load functions </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "loadOptions"></a>
+    <strong>loadOptions ()</strong>
+    </dt>
+    <dd>
+    Loads options
+ loads options from file, returns true if loaded, false if not
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="index.html#optionsFile">guildsystem.optionsFile</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "loadGuilds"></a>
+    <strong>loadGuilds ()</strong>
+    </dt>
+    <dd>
+    Loads guilds
+ loads guilds from file, returns true if loaded, false if not
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "loadSubmodules"></a>
+    <strong>loadSubmodules ()</strong>
+    </dt>
+    <dd>
+    Loads submodules
+ Load submodules from guildsystem.options.submodules
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Save_functions"></a>Save functions </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "saveOptions"></a>
+    <strong>saveOptions ()</strong>
+    </dt>
+    <dd>
+    Save options
+ saves options to file, returns true if loaded, false if not.  (needed to allow server owner edit options on the fly
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "saveGuilds"></a>
+    <strong>saveGuilds ()</strong>
+    </dt>
+    <dd>
+    Saves guilds
+ saves guilds to file, returns true if saved, false if not
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Main_method"></a>Main method </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "init"></a>
+    <strong>init ()</strong>
+    </dt>
+    <dd>
+    Init function
+ Starts the guild system and loads needed files for core
+
+
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="file_methods"></a>file methods </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "fileCheck"></a>
+    <strong>fileCheck (path)</strong>
+    </dt>
+    <dd>
+    filecheck
+ check if file exists, returns boolean
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">path</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2019-05-20 16:32:26 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
