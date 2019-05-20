@@ -61,16 +61,16 @@ end
 
 --- Init function
 -- Starts the guild system and loads needed files for core
-function guildsystem.core.init()
+function guildsystem.init()
 	tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load options file: " .. guildsystem.core.optionsFile)
-	if guildsystem.core.load.options() then
+	if guildsystem.loadOptions() then
 		tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Options loaded.")
 		tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load guilds file: " .. guildsystem.options.files.guilds)
-		if guildsystem.core.load.guilds() then
+		if guildsystem.loadGuilds() then
 			tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Guilds loaded.")
 			tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load guilds submodules")
 
-			guildsystem.load.submodules() -- submodules should report if they loaded correctly
+			guildsystem.loadSubmodules() -- submodules should report if they loaded correctly
 		end
 	end
 end
