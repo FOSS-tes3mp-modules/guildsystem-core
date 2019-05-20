@@ -134,6 +134,13 @@ function guildsystem.createOptionsFile()
 	return guildsystem.saveOptions()
 end
 
+--- Create guilds file if there isn't one,  returning boolean of success status
+-- @return boolean
+function guildsystem.createGuildsFile()
+	guildsystem.guilds = {}
+	return guildsystem.saveGuilds()
+end
+
 --- Update functions
 -- @section update
 
