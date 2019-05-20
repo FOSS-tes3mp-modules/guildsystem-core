@@ -176,9 +176,8 @@ function guildsystem.updateVersion()
 	
 	if update then
 		return guildsystem.saveOptions()
-	else
-		return false
 	end
+	return false
 end
 
 
