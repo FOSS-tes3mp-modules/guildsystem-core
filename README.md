@@ -10,9 +10,9 @@ Not yet, there is still some work to be done and tested.
 ### Untested
 - Config loading
 - Submodule loading
+- Creating an guild
 
 ### Uncoded
-- Creating an guild
 - Leaving an guild
 - (custom) ranks
 - Proper version -> new version updating
