@@ -1,6 +1,5 @@
 guildsystem = {
 	core = {},
-	plugins = {},
 	config = {
 		files = {
 			guilds = "/custom/guildsystem/guilds.json",
