@@ -62,12 +62,8 @@ function guildsystem.init()
 	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Attempting to load guilds submodules")
 	if !guildsystem.loadSubmodules() then -- submodules should report if they loaded correctly
 		tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Some modules could not be loaded")
-	end
-	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Loaded submodules:")
-	local submoduleCount = 1
-	for k, v in ipairs(guildsystem.submodules) do
-		tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] " .. submoduleCount .. ": " .. k)
-		submoduleCount++
+	else
+		tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] All modules loaded correctly.")
 	end
 end
 
@@ -96,10 +92,24 @@ end
 function guildsystem.loadSubmodules()
     if guildsystem.submodules == nil then
         guildsystem.submodules = {}
-    end
-	for k, v in ipairs(guildsystem.options.submodules) do
-		guildsystem.submodules[v] = require("../" .. v .. "/main")
 	end
+	
+	local goodLoad = true
+	local submoduleCount = 1
+	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Loaded submodules:")
+	for k, v in pairs(guildsystem.options.submodules) do
+		guildsystem.submodules[v] = require("../" .. v .. "/main")
+		
+		if guildsystem.submodules[v] == nil then
+			goodLoad = false
+			tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] " .. k .. " didn't load!")
+		else
+			tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] " .. submoduleCount .. ": " .. k)
+			submoduleCount++
+		end
+	end
+
+	return goodLoad
 end
 
 --- Save functions
