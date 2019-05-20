@@ -125,7 +125,13 @@ end
 --- Create config file if there isn't one, returning boolean of success status
 -- @return boolean
 function guildsystem.createOptionsFile()
-
+	guildsystem.options = {
+		files = {
+			guilds = "/custom/guildsystem/guilds.json"
+		},
+		version = '0.1'
+	}
+	return guildsystem.saveOptions()
 end
 
 --- File functions
