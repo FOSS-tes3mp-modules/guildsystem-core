@@ -75,6 +75,23 @@ function guildsystem.core.init()
 	end
 end
 
+--- file methods
+-- @section file
+
+--- filecheck
+-- check if file exists, returns boolean
+-- @string path
+-- @return boolean
+function guildsystem.fileCheck(path)
+	local fh = io.open( path, "r" )
+	if fh then
+		io.close(fh)
+		return true
+	end
+	return false
+end
+
+
 customEventHooks.registerHandler("OnServerPostInit", guildsystem.init)
 
 return guildsystem
