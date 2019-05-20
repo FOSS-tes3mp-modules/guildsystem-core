@@ -75,7 +75,7 @@ function guildsystem.saveGuilds()
 	return jsonInterface.save(guildsystem.options.files.guilds, guildsystem.guilds)
 end
 
---- file methods
+--- File methods
 -- @section file
 
 --- filecheck
