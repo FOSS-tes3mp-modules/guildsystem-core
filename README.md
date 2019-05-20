@@ -15,6 +15,12 @@ git clone git@github.com:FOSS-tes3mp-modules/guildsystem-core.git guildsystem
 5. create `server/data/custom/guildsystem/`
 6. success!
 
+## How to generate the docs
+1. Install [LDOC](https://github.com/stevedonovan/ldoc "github")
+2. CD to `server/scripts/custom/guildsystem/`
+3. Execute `ldoc .`
+4. Open `server/scripts/custom/guildsystem/doc/index.html` in your browser
+
 ## How to install an submodule
 1. clone the repository in your `server/scripts/custom/guildsystem`
 ```
