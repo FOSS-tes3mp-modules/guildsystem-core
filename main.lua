@@ -149,9 +149,13 @@ function guildsystem.createOptionsFile()
 			blacklist = {},
 			guildFormat = {
 				members = {},
-				ranks = {}
+				ranks = {},
+				guildRankToDeleteGuild = 10
 			}
 		}
+		serverRankToDeleteGuild = 3,
+		guildRankToDeleteGuild = 10,
+		serverWideGuildRankToDelete = true
 	}
 	return guildsystem.saveOptions()
 end
@@ -175,7 +179,7 @@ function guildsystem.createGuild(pid, guildName)
 	end
 
 	-- Player already in guild
-	if Players[pid].guildName == nil or Players.guildName == "" then
+	if Players[pid].guildName ~= nil then
 		return false
 	end
 
@@ -255,6 +259,56 @@ function guildsystem.updateVersion()
 	return false
 end
 
+--- Delete functions
+-- @section delete
+
+--- Delete guild
+-- check if allowed to delete guild
+-- @param pid
+-- @string guildName
+function guildsystem.deleteGuild(pid, guildName)
+
+	-- @todo Properly filter guildName
+	if guildName == nil or guildName == "" then
+		return false
+	end
+	-- Guild already exists
+	if guildsystem.guilds[guildName] == nil then
+		return false
+	end
+		
+	local allowed = false
+	local rankNeeded = guildsystem.options.serv
+	if guildsystem.options.serverWideGuildRankToDelete then
+		rankNeeded = guildsystem.options.guildRankToDeleteGuild
+	else
+		rankNeeded = guildsystem.guilds[guildName].guildRankToDeleteGuild
+	end
+
+	-- check if player server rank is high enough to delete guild
+	if Players[pid].data.settings.staffRank >= guildsystem.options.serverRankToDeleteGuild then
+		allowed = true
+	end
+
+	-- check if player guild rank is high enough to delete guild
+	if Players[pid].guild ~= nil then
+		if Players[pid].guild[guildName] ~= nil then
+			if Players[pid].guild[guildName] >= rankNeeded then
+				allowed = true
+			end
+		end
+	end
+
+	if !allowed then
+		return false
+	else
+		guildsystem.guilds[guildName] = nil
+		for pID, t in ipairs(Players) do
+			Players[pID].guild[guildName] = nil
+		end
+		return true
+	end
+end
 
 --- File functions
 -- @section file
