@@ -15,7 +15,11 @@ git clone git@github.com:FOSS-tes3mp-modules/guildsystem-core.git guildsystem
 5. create `server/data/custom/guildsystem/`
 6. success!
 
-## How to generate the docs
+## Docs
+[guildsystem core](https://foss-tes3mp-modules.github.io/guildsystem-core/ "guildsystem core")
+
+### How to generate the docs
+Want to update your local docs because you added something?
 1. Install [LDOC](https://github.com/stevedonovan/ldoc "github")
 2. CD to `server/scripts/custom/guildsystem/`
 3. Execute `ldoc .`
