@@ -3,7 +3,7 @@
 -- @module guildsystem
 guildsystem = {}
 
---- options file
+--- options file (default: "/custom/guildsystem/options.json")
 guildsystem.optionsFile = "/custom/guildsystem/options.json"
 --- module version: 1
 guildsystem.version = 1
