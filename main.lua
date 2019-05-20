@@ -140,7 +140,17 @@ function guildsystem.createOptionsFile()
 			guilds = "/custom/guildsystem/guilds.json"
 		},
 		version = 1,
-		submodules = {}
+		submodules = {},
+		guildCreation = {
+			cost = false,
+			item = "gold_001",
+			amount = 50,
+			blacklist = {},
+			guildFormat = {
+				members = {},
+				ranks = {}
+			}
+		}
 	}
 	return guildsystem.saveOptions()
 end
@@ -150,6 +160,59 @@ end
 function guildsystem.createGuildsFile()
 	guildsystem.guilds = {}
 	return guildsystem.saveGuilds()
+end
+
+--- Create guild returning boolean of success status
+-- @return boolean
+-- @param pid player ID
+-- @string guildName guild name
+function guildsystem.createGuild(pid, guildName)
+	
+	-- @todo Properly filter guildName
+	if guildName == nil or guildName == "" then
+		return false
+	end
+
+	-- Player already in guild
+	if Players[pid].guildName == nil or Players.guildName == "" then
+		return false
+	end
+
+	-- Guild already exists
+	if guildsystem.guilds[guildName] ~= nil then
+		return false	
+	end
+
+	-- Check (case-insensitive) if guildName is in blacklist
+	for k, v in pairs(guildsystem.options.guildCreation.blacklist) do
+		if guildName:ciEqual(v) then
+			return false
+		end
+	end
+
+	-- @todo Add subroutine to check for cost 
+	--[[
+	-- Check if player has currency in inventory
+	if guildsystem.guildCreation.cost then
+		
+	end
+	--]]
+
+	guildsystem.guilds[guildName] = guildsystem.options.guildCreation.guildFormat
+	guildsystem.guilds[guildName].members[Players[pid].data.login.name] = 10
+
+	if guildsystem.saveGuilds() then
+		Players[pid].guild = {
+			[guildName] = guildsystem.guilds[guildName].members[Players[pid].data.login.name]
+		}
+		-- Actually remove currency from inventory
+		if guildsystem.guildCreation.cost then
+
+		end
+		return true
+	else
+		guildsystem.guilds[guildName] = nil
+		return false
 end
 
 --- Update functions
