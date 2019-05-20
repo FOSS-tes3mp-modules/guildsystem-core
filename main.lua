@@ -14,27 +14,60 @@ guildsystem.version = '0.1'
 --- Init function
 -- Starts the guild system and loads needed files for core
 function guildsystem.init()
-	tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load options file: " .. guildsystem.optionsFile)
+
+	tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Attempt to load options file")
 	if !guildsystem.loadOptions() then
-		tes3mp.LogMessage(enumerations.log.WARN, "[guilds] Couldn't load options file, attempting to create it instead.")
+		tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Couldn't load options file, attempting to create it instead.")
 		if !guildsystem.createOptionsFile() then
-			tes3mp.LogMessage(enumerations.log.ERROR, "[guilds] Couldn't create options file: " .. guildsystem.optionsFile)
-			tes3mp.LogMessage(enumerations.log.ERROR, "[guilds] Guildsystem will not be able to save, make sure that " .. guildsystem.optionsFile .. "'s directory is writable")
+			tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Couldn't create options file: " .. guildsystem.optionsFile)
+			tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Guildsystem will not be able to save, make sure that " .. guildsystem.optionsFile .. "'s directory is writable")
+		else
+			tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Created options file: " .. guildsystem.optionsFile)
 		end
+	else
+		tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Loaded options file: " .. guildsystem.optionsFile)
 	end
 
-	tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load guilds file: " .. guildsystem.options.files.guilds)
-	if !guildsystem.loadGuilds() then
-		tes3mp.LogMessage(enumerations.log.WARN, "[guilds] Couldn't load options file, attempting to create it instead.")
-		if !guildsystem.createGuildsFile() then
-			tes3mp.LogMessage(enumerations.log.ERROR, "[guilds] Couldn't create guilds file: " .. guildsystem.options.files.guilds)
-			tes3mp.LogMessage(enumerations.log.ERROR, "[guilds] Guildsystem will not be able to save, make sure that " .. guildsystem.options.files.guilds .. "'s directory is writable")
+	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Checking versions.")
+	if guildsystem.version ~= guildsystem.options.version then
+		tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Seems like options file is from older version, attempting to fix it.")
+		if !guildsystem.updateVersion() then
+			tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Couldn't fix version mismatch, will overwrite options file with new version based on script.")
+			if !guildsystem.saveOptions() then
+				tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Couldn't create options file: " .. guildsystem.optionsFile)
+				tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Guildsystem will not be able to save, make sure that " .. guildsystem.optionsFile .. "'s directory is writable")
+			else
+				tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Saved version overwritten by script version")
+			end
+		else
+			tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Version updated.")
 		end
+	else
+		tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Version is up to date.")
+	end
+
+	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Attempting to load guilds file: " .. guildsystem.options.files.guilds)
+	if !guildsystem.loadGuilds() then
+		tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Couldn't load options file, attempting to create it instead.")
+		if !guildsystem.createGuildsFile() then
+			tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Couldn't create guilds file: " .. guildsystem.options.files.guilds)
+			tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Guildsystem will not be able to save, make sure that " .. guildsystem.options.files.guilds .. "'s directory is writable")
+		else
+			tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] New guildas file created: " .. guildsystem.options.files.guilds)
+		end
+	else
+		tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Loaded guilds file")
 	end
 	
-	tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load guilds submodules")
+	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Attempting to load guilds submodules")
 	if !guildsystem.loadSubmodules() then -- submodules should report if they loaded correctly
-
+		tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Some modules could not be loaded")
+	end
+	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Loaded submodules:")
+	local submoduleCount = 1
+	for k, v in ipairs(guildsystem.submodules) do
+		tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] " .. submoduleCount .. ": " .. k)
+		submoduleCount++
 	end
 end
 
@@ -86,7 +119,16 @@ function guildsystem.saveGuilds()
 	return jsonInterface.save(guildsystem.options.files.guilds, guildsystem.guilds)
 end
 
---- File methods
+--- Create functions
+-- @section create
+
+--- Create config file if there isn't one, returning boolean of success status
+-- @return boolean
+function guildsystem.createOptionsFile()
+
+end
+
+--- File functions
 -- @section file
 
 --- filecheck
