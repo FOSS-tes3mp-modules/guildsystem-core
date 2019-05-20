@@ -8,6 +8,25 @@ guildsystem.optionsFile = "/custom/guildsystem/options.json"
 --- module version: 0.1
 guildsystem.version = '0.1'
 
+--- Main method
+-- @section main
+
+--- Init function
+-- Starts the guild system and loads needed files for core
+function guildsystem.init()
+	tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load options file: " .. guildsystem.core.optionsFile)
+	if guildsystem.loadOptions() then
+		tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Options loaded.")
+		tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load guilds file: " .. guildsystem.options.files.guilds)
+		if guildsystem.loadGuilds() then
+			tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Guilds loaded.")
+			tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load guilds submodules")
+
+			guildsystem.loadSubmodules() -- submodules should report if they loaded correctly
+		end
+	end
+end
+
 --- Load functions
 -- @section load
 
@@ -54,25 +73,6 @@ end
 -- @return boolean
 function guildsystem.saveGuilds()
 	return jsonInterface.save(guildsystem.options.files.guilds, guildsystem.guilds)
-end
-
---- Main method
--- @section main
-
---- Init function
--- Starts the guild system and loads needed files for core
-function guildsystem.init()
-	tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load options file: " .. guildsystem.core.optionsFile)
-	if guildsystem.loadOptions() then
-		tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Options loaded.")
-		tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load guilds file: " .. guildsystem.options.files.guilds)
-		if guildsystem.loadGuilds() then
-			tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Guilds loaded.")
-			tes3mp.LogMessage(enumerations.log.INFO, "[guilds] Attempting to load guilds submodules")
-
-			guildsystem.loadSubmodules() -- submodules should report if they loaded correctly
-		end
-	end
 end
 
 --- file methods
