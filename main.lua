@@ -139,7 +139,8 @@ function guildsystem.createOptionsFile()
 		files = {
 			guilds = "/custom/guildsystem/guilds.json"
 		},
-		version = 1
+		version = 1,
+		submodules = {}
 	}
 	return guildsystem.saveOptions()
 end
