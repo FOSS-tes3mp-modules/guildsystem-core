@@ -140,9 +140,16 @@ function guildsystem.loadSubmodule(moduleName)
 		for key, value in pairs(result) do
 			package.loaded[modulePath][key] = value
 		end
+		return true
 	else
-		guildsystem.subdmodules[moduleName] = prequire(scriptName)
+		guildsystem.subdmodules[moduleName] = prequire(moduleName)
+		if guildsystem.subdmodules[moduleName] then
+			table.insert(guildsystem.options.subdmodules, moduleName)
+			guildsystem.saveOptions()
+			return true
+		end
 	end
+	return false
 end
 
 --- Save functions
