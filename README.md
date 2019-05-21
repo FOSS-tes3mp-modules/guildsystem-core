@@ -41,7 +41,7 @@ Want to update your local docs because you added something?
 4. Open `server/scripts/custom/guildsystem/doc/index.html` in your browser
 
 ## How to install an submodule
-1. clone the repository in your `server/scripts/custom/guildsystem`
+1. clone the submodule repository in your `server/scripts/custom/guildsystem/submodules/`
 ```
 git clone git@github.com:FOSS-tes3mp-modules/guildsystem-%submodule-name%.git %submodule-name%
 ```

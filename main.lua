@@ -88,7 +88,8 @@ function guildsystem.loadGuilds()
 end
 
 --- Loads submodules
--- Load submodules from guildsystem.options.submodules
+-- from guildsystem.options.submodules, returning boolean of success status
+-- @return boolean
 function guildsystem.loadSubmodules()
     if guildsystem.submodules == nil then
         guildsystem.submodules = {}
@@ -116,7 +117,7 @@ end
 -- @section save
 
 --- Save options
--- saves options to file, returns true if loaded, false if not. (needed to allow server owner edit options on the fly
+-- saves options to file, returns true if loaded, false if not. (needed to allow server owner edit options on the fly)
 -- @return boolean
 function guildsystem.saveOptions()
 	return jsonInterface.save(guildsystem.optionsFile, guildsystem.options)
