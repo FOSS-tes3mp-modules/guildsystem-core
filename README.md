@@ -1,15 +1,15 @@
 # guildsystem-core
-The core for the guildsystem for tes3mp
+The core for an guildsystem for tes3mp
 
 
 ## Should I use this?
 Not yet, there is still some work to be done and tested.
-### Tested
-- Nothing
 
-### Untested
+### Tested (It works on my machine!)
 - Config loading
 - Submodule loading
+
+### Untested
 - Creating an guild
 - Deleting an guild
 
