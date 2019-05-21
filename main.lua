@@ -59,7 +59,7 @@ function guildsystem.init()
 		tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Loaded guilds file")
 	end
 	
-	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Attempting to load guilds submodules")
+	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Attempting to load submodules")
 	if not guildsystem.loadSubmodules() then -- submodules should report if they loaded correctly
 		tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Some modules could not be loaded")
 	else
@@ -89,24 +89,23 @@ end
 
 --- Loads submodules
 -- Load submodules from guildsystem.options.submodules
--- @todo check if prequire is better compared to current method used
 function guildsystem.loadSubmodules()
     if guildsystem.submodules == nil then
         guildsystem.submodules = {}
 	end
-	
+
 	local goodLoad = true
 	local submoduleCount = 1
+	
 	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Loaded submodules:")
 	for k, v in pairs(guildsystem.options.submodules) do
-		guildsystem.submodules[v] = require("../" .. v .. "/main")
-		
-		if guildsystem.submodules[v] == nil then
-			goodLoad = false
-			tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] " .. k .. " didn't load!")
-		else
-			tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] " .. submoduleCount .. ": " .. k)
+		guildsystem.submodules[v] = prequire("custom/guildsystem/submodules/" .. v .. "/main")
+		if guildsystem.submodules[v] then
+			tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Module " .. submoduleCount .. ": " .. v .. " has been loaded.")
 			submoduleCount = submoduleCount + 1
+		else
+			tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Module " .. v .. " could not be found.")
+			goodLoad = false
 		end
 	end
 
