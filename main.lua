@@ -53,7 +53,7 @@ function guildsystem.init()
 			tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Couldn't create guilds file: " .. guildsystem.options.files.guilds)
 			tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Guildsystem will not be able to save, make sure that " .. guildsystem.options.files.guilds .. "'s directory is writable")
 		else
-			tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] New guildas file created: " .. guildsystem.options.files.guilds)
+			tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] New guilds file created: " .. guildsystem.options.files.guilds)
 		end
 	else
 		tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Loaded guilds file")
