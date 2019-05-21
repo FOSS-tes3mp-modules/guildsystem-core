@@ -28,7 +28,7 @@ function guildsystem.init()
 		tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Loaded options file: " .. guildsystem.optionsFile)
 	end
 
-	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Checking versions.")
+	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Checking version.")
 	if guildsystem.version ~= guildsystem.options.version then
 		tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Seems like options file is from older version, attempting to fix it.")
 		if not guildsystem.updateVersion() then
