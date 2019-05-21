@@ -12,9 +12,9 @@ Not yet, there is still some work to be done and tested.
 ### Untested
 - Creating an guild
 - Deleting an guild
+- Lazy loading (on the fly) of modules (per module)
 
 ### Uncoded
-- Lazy loading (on the fly) of modules (per module)
 - Leaving an guild
 - (custom) ranks
 - Proper version -> new version updating
