@@ -7,13 +7,14 @@ Not yet, there is still some work to be done and tested.
 
 ### Tested (It works on my machine!)
 - Config loading
-- Submodule loading
+- Submodules loading
 
 ### Untested
 - Creating an guild
 - Deleting an guild
 
 ### Uncoded
+- Lazy loading (on the fly) of modules (per module)
 - Leaving an guild
 - (custom) ranks
 - Proper version -> new version updating
