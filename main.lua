@@ -113,6 +113,38 @@ function guildsystem.loadSubmodules()
 	return goodLoad
 end
 
+---- Loads subdmodule
+-- from guildsystem.options.submodules, returning boolean of success status
+-- @return boolean
+function guildsystem.loadSubmodule(moduleName)
+	if moduleName == nil or moduleName == "" then
+		return false
+	end
+	
+	local isLoaded = false
+	if package.loaded[moduleName] then
+		isLoaded = true
+	end
+
+
+	if isLoaded then
+		local modulePath = package.searchpath("custom/guildsystem/submodules/" .. moduleName .. "/main", package.path)
+		guildsystem.subdmodules[moduleName] = dofile(modulePath)
+
+		for key, value in pairs(package.loaded[modulePath]) do
+			if guildsystem.subdmodules[moduleName] == nil then
+				package.loaded[modulePath][key] = nil
+			end
+		end
+
+		for key, value in pairs(result) do
+			package.loaded[modulePath][key] = value
+		end
+	else
+		guildsystem.subdmodules[moduleName] = prequire(scriptName)
+	end
+end
+
 --- Save functions
 -- @section save
 
