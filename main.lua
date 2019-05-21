@@ -15,10 +15,10 @@ guildsystem.version = 1
 -- Starts the guild system and loads needed files for core
 function guildsystem.init()
 
-	tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Attempt to load options file")
-	if !guildsystem.loadOptions() then
+	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Attempt to load options file")
+	if not guildsystem.loadOptions() then
 		tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Couldn't load options file, attempting to create it instead.")
-		if !guildsystem.createOptionsFile() then
+		if not guildsystem.createOptionsFile() then
 			tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Couldn't create options file: " .. guildsystem.optionsFile)
 			tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Guildsystem will not be able to save, make sure that " .. guildsystem.optionsFile .. "'s directory is writable")
 		else
@@ -31,9 +31,9 @@ function guildsystem.init()
 	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Checking versions.")
 	if guildsystem.version ~= guildsystem.options.version then
 		tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Seems like options file is from older version, attempting to fix it.")
-		if !guildsystem.updateVersion() then
+		if not guildsystem.updateVersion() then
 			tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Couldn't fix version mismatch, will overwrite options file with new version based on script.")
-			if !guildsystem.saveOptions() then
+			if not guildsystem.saveOptions() then
 				tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Couldn't create options file: " .. guildsystem.optionsFile)
 				tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Guildsystem will not be able to save, make sure that " .. guildsystem.optionsFile .. "'s directory is writable")
 			else
@@ -47,9 +47,9 @@ function guildsystem.init()
 	end
 
 	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Attempting to load guilds file: " .. guildsystem.options.files.guilds)
-	if !guildsystem.loadGuilds() then
+	if not guildsystem.loadGuilds() then
 		tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Couldn't load options file, attempting to create it instead.")
-		if !guildsystem.createGuildsFile() then
+		if not guildsystem.createGuildsFile() then
 			tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Couldn't create guilds file: " .. guildsystem.options.files.guilds)
 			tes3mp.LogMessage(enumerations.log.ERROR, "[guildsystem] Guildsystem will not be able to save, make sure that " .. guildsystem.options.files.guilds .. "'s directory is writable")
 		else
@@ -60,7 +60,7 @@ function guildsystem.init()
 	end
 	
 	tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] Attempting to load guilds submodules")
-	if !guildsystem.loadSubmodules() then -- submodules should report if they loaded correctly
+	if not guildsystem.loadSubmodules() then -- submodules should report if they loaded correctly
 		tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] Some modules could not be loaded")
 	else
 		tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] All modules loaded correctly.")
@@ -106,7 +106,7 @@ function guildsystem.loadSubmodules()
 			tes3mp.LogMessage(enumerations.log.WARN, "[guildsystem] " .. k .. " didn't load!")
 		else
 			tes3mp.LogMessage(enumerations.log.INFO, "[guildsystem] " .. submoduleCount .. ": " .. k)
-			submoduleCount++
+			submoduleCount = submoduleCount + 1
 		end
 	end
 
@@ -152,7 +152,7 @@ function guildsystem.createOptionsFile()
 				ranks = {},
 				guildRankToDeleteGuild = 10
 			}
-		}
+		},
 		serverRankToDeleteGuild = 3,
 		guildRankToDeleteGuild = 10,
 		serverWideGuildRankToDelete = true
@@ -218,6 +218,7 @@ function guildsystem.createGuild(pid, guildName)
 	else
 		guildsystem.guilds[guildName] = nil
 		return false
+	end
 end
 
 --- Update functions
@@ -238,11 +239,11 @@ function guildsystem.updateVersion()
 		scriptVersion = false
 	end
 
-	if !scriptVersion and !optionsVersion then
+	if not scriptVersion and not optionsVersion then
 		update = false
-	else if !scriptVersion and optionsVersion then
+	elseif not scriptVersion and optionsVersion then
 		guildsystem.version = guildsystem.options.version
-	else if scriptVersion and !optionsVersion then
+	elseif scriptVersion and not optionsVersion then
 		guildsystem.options.version = guildsystem.version
 	end
 
@@ -299,7 +300,7 @@ function guildsystem.deleteGuild(pid, guildName)
 		end
 	end
 
-	if !allowed then
+	if not allowed then
 		return false
 	else
 		guildsystem.guilds[guildName] = nil
